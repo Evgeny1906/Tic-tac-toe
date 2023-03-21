@@ -2,94 +2,63 @@
 sq = [[' '] * 3 for q in range(3)]
 
 
-def h():
-    len_ = (f"   0 | 1 | 2 |")
-    print(len_)
-
-    for qs, s in enumerate(sq):
-
-        row = f"{qs}| {' | '.join(s)} | "
+def grate():
+    coord_y = '  | 0 | 1 | 2 |'
+    print(coord_y)
+    print('_' * len(coord_y))
+    for coord_x, fild in enumerate(sq):
+        row = f"{coord_x} | {' | '.join(fild) } | "
         print(row)
-        L = len(row)
-        print("_" * L)
+        print('_' * len(coord_y))
 
-h()
+grate()
 
+count = 0
+while True:
 
-def question_X():
-    num = 0
-    while True:
-        num += 1
-        if num % 2 == 0:
-            n = "O"
-        else:
-            n = "X"
-
-        dl = input(f"       введите координаты {n} :  ").split()
-        if len(dl) != 2:
-            print("введите 2 координаты")
-            num -= 1
-            continue
-
-        d, l = dl
-        if not(d.isdigit()) or not(l.isdigit()):
-            print("введите цифры")
-            num -= 1
-            continue
-
-        d, l = int(d), int(l)
-        if 0 > d or d > 2 or 0 > l or l > 2:
-            print("координаты в не диапазона")
-            num -= 1
-            continue
+    count += 1
+    if count % 2 == 0:
+        n = 'O'
+    else:
+        n = 'X'
 
 
-        if sq[d][l] != " ":
-            print("клетка занята")
-            num -= 1
-            continue
+    h, v = input(f"Введите координаты '{n}' через пробел: ").split()
+    if not(h.isdigit()) or not(v.isdigit()):
+        print('Введите цифры')
+        count -= 1
+        continue
+    h, v = int(h), int(v)
+    if h < 0 or h > 2 or v < 0 or v >2:
+        print('Координаты в не диапазона')
+        count -= 1
+        continue
 
-        sq[d][l] = n
-        if num == 9:
-            print("Ничья!")
-            return dl
+    if sq[h][v] == 'O' or sq[h][v] == 'X':
+        print('Эта клетка занята, выберите другую.')
+        count -= 1
+        continue
+    else:
+        sq[h][v] = n
 
 
-        for i in range(3):
-            f = []
-            for j in range(3):
-                f.append(sq[j][i])
-                if f == [n, n, n]:
-                    print(h())
-                    print(f"ПОБЕДИЛ {n}!!!")
-                    return dl
-        for i in range(3):
-            f = []
-            for j in range(3):
-                f.append(sq[i][j])
-                if f == [n, n, n]:
-                    print(h())
-                    print(f"ПОБЕДИЛ {n}!!!")
-                    return dl
-        f = []
-        for i in range(3):
-            f.append(sq[i][i])
-            if f == [n, n, n]:
-                print(h())
-                print(f"ПОБЕДИЛ {n}!!!")
-                return dl
 
-        f = []
-        for i in range(3):
-            f.append(sq[i][2 - i])
-            if f == [n, n, n]:
-                print(h())
-                print(f"ПОБЕДИЛ {n}!!!")
+    if sq[0][0] == sq[0][1] == sq[0][2] == n or sq[1][0] == sq[1][1] == sq[1][2] == n \
+            or sq[2][0] == sq[2][1] == sq[2][2] == n or sq[0][0] == sq[1][0] == sq[2][0] == n \
+            or sq[0][1] == sq[1][1] == sq[2][1] == n or sq[0][2] == sq[1][2] == sq[2][2] == n \
+            or sq[0][0] == sq[1][1] == sq[2][2] == n or sq[0][2] == sq[1][1] == sq[2][0] == n:
+        grate()
+        print('Winner :', n)
+        break
 
-                return dl
 
-        h()
 
-question_X()
+    if count == 9:
+        grate()
+        print('Ничья!')
+        break
 
+
+
+    grate()
 
