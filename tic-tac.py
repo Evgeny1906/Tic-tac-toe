@@ -33,7 +33,7 @@ while True:
         count -= 1
         continue
 
-    if sq[h][v] == 'O' or sq[h][v] == 'X':   #
+    if sq[h][v] == 'O' or sq[h][v] == 'X':   #Проверка на занятость клетки
         print('Эта клетка занята, выберите другую.')
         count -= 1
         continue
