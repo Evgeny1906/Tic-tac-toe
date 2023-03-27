@@ -12,9 +12,8 @@ def grate():                        # Создаём решётку
         print('_' * len(coord_y))
 
 grate()
-r = random.randint(1, 2)
-
-count = 0
+r = randint(1, 2)
+count = r
 while True:
 
     count += 1
