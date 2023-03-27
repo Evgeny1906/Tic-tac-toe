@@ -1,3 +1,4 @@
+from random import randint
 
 sq = [[' '] * 3 for q in range(3)]
 
@@ -11,6 +12,7 @@ def grate():                        # Создаём решётку
         print('_' * len(coord_y))
 
 grate()
+r = random.randint(1, 2)
 
 count = 0
 while True:
@@ -21,7 +23,13 @@ while True:
     else:
         n = 'X'
 
-    h, v = input(f"Введите координаты '{n}' через пробел: ").split()
+    hv = input(f"Введите координаты '{n}' через пробел: ").split()
+    if len(hv) != 2:
+        print("Введите 2 цифры")
+        count -= 1
+        continue
+
+    h, v = hv
     if not(h.isdigit()) or not(v.isdigit()):
         print('Введите цифры')
         count -= 1
